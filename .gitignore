@@ -1,0 +1,6 @@
+profile
+profile/*
+venv
+venv/*
+__pycache__
+.env

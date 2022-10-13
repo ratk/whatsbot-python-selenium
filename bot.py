@@ -1,0 +1,221 @@
+import os
+import sys
+import time
+import re
+import requests
+import json
+
+from dotenv import load_dotenv
+
+from chatterbot import ChatBot
+from chatterbot.trainers import ListTrainer
+from chatterbot.trainers import ChatterBotCorpusTrainer
+
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+
+from spacy.cli import download
+import linecache
+
+
+#download("en_core_web_sm")
+
+def PrintException():
+    exc_type, exc_obj, tb = sys.exc_info()
+    f = tb.tb_frame
+    lineno = tb.tb_lineno
+    filename = f.f_code.co_filename
+    linecache.checkcache(filename)
+    line = linecache.getline(filename, lineno, f.f_globals)
+    print ('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
+
+class ENGSM: 
+    ISO_639_1 = 'en_core_web_sm'
+
+class wppbot:
+
+    dir_path = os.getcwd()
+
+    load_dotenv()  # take environment variables from .env.
+    # Provide the mongodb atlas url to connect python to mongodb using pymongo
+    CONNECTION_STRING = os.getenv('MONGOSTR')   
+
+    def __init__(self, nome_bot):
+        print(self.dir_path)
+        self.bot = ChatBot(nome_bot, 
+            storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
+            logic_adapters=[
+                {
+                    'import_path': 'chatterbot.logic.BestMatch',
+                    'default_response': 'I am sorry, but I do not understand.'
+                }
+            ],
+            database_uri=self.CONNECTION_STRING,
+            tagger_language=ENGSM
+        )
+        # self.trainer = ListTrainer(self.bot)
+        self.bot.set_trainer(ListTrainer)
+
+        self.chrome = self.dir_path+'\chromedriver.exe'
+
+        self.options = webdriver.ChromeOptions()
+        self.options.add_argument(r"user-data-dir="+self.dir_path+"\profile\wpp")
+        
+        self.options.add_experimental_option('useAutomationExtension', False)
+        self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
+
+        # Inicializa o webdriver
+        self.driver = webdriver.Chrome(self.chrome, options=self.options)
+
+    def inicia(self,nome_contato):
+        try: 
+            self.driver.get('https://web.whatsapp.com/')
+            self.driver.implicitly_wait(20)
+
+            self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
+
+            self.caixa_de_pesquisa.send_keys(nome_contato)
+            time.sleep(2)
+            print(nome_contato)
+            self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(nome_contato))
+            self.contato.click()
+            time.sleep(2)
+        except webdriver.common.exception.NoSuchElementException:
+            print("Elemento nao encontrado")
+            PrintException()
+            pass
+        except Exception as e:
+            PrintException()
+            print("Erro ao enviar msg")
+            pass
+
+
+    def saudacao(self,frase_inicial):
+        self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+
+        if type(frase_inicial) == list:
+            for frase in frase_inicial:
+                # quebra a mensagem com shift+enter ao inves de \n
+                for part in frase.split('\n'):
+                    # Digita a mensagem
+                    self.caixa_de_mensagem.send_keys(part)
+                    self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+                time.sleep(1)
+                self.caixa_de_mensagem.send_keys(Keys.ENTER)
+        else:
+            return False
+
+    def escuta(self):
+        texto = ""
+        try:
+            post = self.driver.find_elements("xpath", "//*[contains(@class, '_1-FMR')]")
+            ultimo = len(post) - 1
+            texto = post[ultimo].find_element(By.CSS_SELECTOR, 'span.selectable-text').text
+
+            a=[]
+            y= self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div')
+            qtd = len(y)
+            for i in range(1,qtd+1):
+                adados = self.driver.find_element(By.CSS_SELECTOR,"._3uIPm div:nth-child("+str(i)+")")
+                titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
+                hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").get_attribute('innerHTML')
+                ultima_msg = self.driver.find_element("xpath", "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
+                a.append({"datahora": hora_ultima_msg, "titulo": titulo, "mensagem": ultima_msg})
+
+            #print(a)
+            res = json.dumps(a,ensure_ascii=False) #.encode('utf8')
+            print(res)
+        except Exception as e:
+            PrintException()
+            print("Erro ao escutar msgs")
+            pass
+
+        return texto
+    def aprender(self,ultimo_texto,frase_inicial,frase_final,frase_erro):
+        self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+        self.caixa_de_mensagem.send_keys(frase_inicial)
+        time.sleep(1)
+        self.caixa_de_mensagem.send_keys(Keys.ENTER)
+        self.x = True
+        while self.x == True:
+            texto = self.escuta()
+
+            if texto != ultimo_texto and re.match(r'^::', texto):
+                if texto.find('|') != -1:
+                    ultimo_texto = texto
+                    texto = texto.replace('::', '')
+                    texto = texto.lower()
+                    texto = texto.replace('|', '|*')
+                    texto = texto.split('*')
+                    novo = []
+                    for elemento in texto:
+                        elemento = elemento.strip()
+                        novo.append(elemento)
+
+                    self.bot.train(novo)
+                    self.caixa_de_mensagem.send_keys(frase_final)
+                    time.sleep(1)
+                    self.caixa_de_mensagem.send_keys(Keys.ENTER)
+                    self.x = False
+                    return ultimo_texto
+                else:
+                    self.caixa_de_mensagem.send_keys(frase_erro)
+                    time.sleep(1)
+                    self.caixa_de_mensagem.send_keys(Keys.ENTER)
+                    self.x = False
+                    return ultimo_texto
+            else:
+                ultimo_texto = texto
+
+    def noticias(self):
+
+        req = requests.get('https://newsapi.org/v2/top-headlines?sources=globo&pageSize=2&apiKey=f6fdb7cb0f2a497d92dbe719a29b197f')
+        noticias = json.loads(req.text)
+
+        for news in noticias['articles']:
+            titulo = news['title']
+            link = news['url']
+            new = 'bot: ' + titulo + ' ' + link + '\n'
+            # quebra a mensagem com shift+enter ao inves de \n
+            for part in new.split('\n'):
+                # Digita a mensagem
+                self.caixa_de_mensagem.send_keys(part)
+                self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+            time.sleep(2)
+            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+
+    def responde(self,texto):
+        response = self.bot.get_response(texto)
+        # if float(response.confidence) > 0.5:
+        response = str(response)
+        response = 'bot: ' + response
+        self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+        self.caixa_de_mensagem.send_keys(response)
+        time.sleep(1)
+        self.caixa_de_mensagem.send_keys(Keys.ENTER)
+
+    def envia_msg(self, msg):
+        """ Envia uma mensagem para a conversa aberta """
+        try:
+            time.sleep(2)
+            # Seleciona acaixa de mensagem
+            self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            # quebra a mensagem com shift+enter ao inves de \n
+            for part in msg.split('\n'):
+                # Digita a mensagem
+                self.caixa_de_mensagem.send_keys(part)
+                self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+            time.sleep(1)
+            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+        except webdriver.common.exception.NoSuchElementException:
+            print("Elemento nao encontrado")
+            PrintException()
+        except Exception as e:
+            PrintException()
+            print("Erro ao enviar msg")
+
+    def treina(self,nome_pasta):
+        for treino in os.listdir(nome_pasta):
+            conversas = open(nome_pasta+'/'+treino, 'r', encoding='utf-8').readlines()
+            self.bot.train(conversas)
