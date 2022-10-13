@@ -1,3 +1,4 @@
+from ast import Try
 import os
 import sys
 import time
@@ -9,11 +10,11 @@ from dotenv import load_dotenv
 
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
-from chatterbot.trainers import ChatterBotCorpusTrainer
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
+from selenium.common.exceptions import NoSuchElementException        
 
 from spacy.cli import download
 import linecache
@@ -67,6 +68,7 @@ class wppbot:
 
         # Inicializa o webdriver
         self.driver = webdriver.Chrome(self.chrome, options=self.options)
+    
 
     def inicia(self,nome_contato):
         try: 
@@ -114,24 +116,44 @@ class wppbot:
             texto = post[ultimo].find_element(By.CSS_SELECTOR, 'span.selectable-text').text
 
             a=[]
-            y= self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div')
-            qtd = len(y)
-            for i in range(1,qtd+1):
-                adados = self.driver.find_element(By.CSS_SELECTOR,"._3uIPm div:nth-child("+str(i)+")")
-                titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
-                hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").get_attribute('innerHTML')
-                ultima_msg = self.driver.find_element("xpath", "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
-                a.append({"datahora": hora_ultima_msg, "titulo": titulo, "mensagem": ultima_msg})
-
-            #print(a)
-            res = json.dumps(a,ensure_ascii=False) #.encode('utf8')
-            print(res)
+            qtd = len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))
         except Exception as e:
             PrintException()
             print("Erro ao escutar msgs")
-            pass
+
+        # percorre as mensagens recentes do painel esquerdo
+        for i in range(1,qtd+1):
+            nao_lidas = "0"
+            # check se tem mensagem nao lida
+
+            self.driver.implicitly_wait(0)
+            try:
+                # verifica se existe o elemento que informa se tem novas mensagens
+                if(self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div/span")):
+                    nl = self.driver.find_elements(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div")
+                    last = len(nl) - 1
+                    # pega sempre o ultimo elemento para o numero de mensagens nao lidas 
+                    data_icon = nl[last].find_element(By.TAG_NAME, 'span').get_attribute("data-icon")
+                    if (data_icon != "muted" and data_icon != "pinned2") :
+                        nao_lidas = nl[last].find_element(By.TAG_NAME, 'span').text
+                        # pega dados do painel esquerdo das mensagens recentes
+                        titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
+                        hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").text
+                        ultima_msg = self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
+                        # armazeno no array
+                        a.append({"datahora": hora_ultima_msg, "nao_lidas": nao_lidas, "titulo": titulo, "mensagem": ultima_msg})
+
+            except NoSuchElementException:
+                nao_lidas = "0"
+
+        # converto em json
+        res = json.dumps(a,ensure_ascii=False).replace("\\n"," #PULALINHA# ")
+        print(res)
+
+        self.driver.implicitly_wait(20)
 
         return texto
+
     def aprender(self,ultimo_texto,frase_inicial,frase_final,frase_erro):
         self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
         self.caixa_de_mensagem.send_keys(frase_inicial)

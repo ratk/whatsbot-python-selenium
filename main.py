@@ -3,19 +3,20 @@ from bot import wppbot
 import sys
 import time
 
-bot = wppbot('robozin')
+botName = "Geobot"
+
+bot = wppbot(botName)
 bot.treina('treinamento')
 bot.inicia('Teste Bot Whats')
 # bot.inicia('Bhost Recon - uailands')
 # bot.inicia('Janderson Cardoso')
-bot.saudacao(['*--------*\nBot: Oi, sou o robozin!\nBot: Use *::* no início para falar comigo'])
+bot.saudacao(['*--------*\nBot: Oi, sou o '+botName+'!\nBot: Use *::* no início para falar comigo'])
 ultimo_texto = ''
 
 texto = ""
 
-
 while texto != "/quit":
-    time.sleep(4)
+    time.sleep(10)
     texto = bot.escuta()
 
     if texto == '/quit':
