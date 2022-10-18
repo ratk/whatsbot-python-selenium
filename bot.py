@@ -1,4 +1,3 @@
-from ast import Try
 import os
 import sys
 import time
@@ -62,9 +61,11 @@ class wppbot:
 
         self.options = webdriver.ChromeOptions()
         self.options.add_argument(r"user-data-dir="+self.dir_path+"\profile\wpp")
+        self.options.add_argument('--remote-debugging-port=5678')
         
         self.options.add_experimental_option('useAutomationExtension', False)
         self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        # self.options.add_experimental_option("debuggerAddress", "127.0.0.1:5678")
 
         # Inicializa o webdriver
         self.driver = webdriver.Chrome(self.chrome, options=self.options)
@@ -122,33 +123,52 @@ class wppbot:
             print("Erro ao escutar msgs")
 
         # percorre as mensagens recentes do painel esquerdo
-        for i in range(1,qtd+1):
+        for i in range(1,len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))+1):
             nao_lidas = "0"
+            tem_nova_msg = False
             # check se tem mensagem nao lida
 
             self.driver.implicitly_wait(0)
+            # verifica se existe o elemento que informa se tem novas mensagens
             try:
-                # verifica se existe o elemento que informa se tem novas mensagens
                 if(self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div/span")):
-                    nl = self.driver.find_elements(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div")
-                    last = len(nl) - 1
-                    # pega sempre o ultimo elemento para o numero de mensagens nao lidas 
-                    data_icon = nl[last].find_element(By.TAG_NAME, 'span').get_attribute("data-icon")
-                    if (data_icon != "muted" and data_icon != "pinned2") :
-                        nao_lidas = nl[last].find_element(By.TAG_NAME, 'span').text
-                        # pega dados do painel esquerdo das mensagens recentes
-                        titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
-                        hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").text
-                        ultima_msg = self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
-                        # armazeno no array
-                        a.append({"datahora": hora_ultima_msg, "nao_lidas": nao_lidas, "titulo": titulo, "mensagem": ultima_msg})
-
+                    tem_nova_msg = True
             except NoSuchElementException:
                 nao_lidas = "0"
 
+
+            if(tem_nova_msg):
+                nl = self.driver.find_elements(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div")
+                last = len(nl) - 1
+                # pega sempre o ultimo elemento para o numero de mensagens nao lidas 
+                data_icon = nl[last].find_element(By.TAG_NAME, 'span').get_attribute("data-icon")
+                if (data_icon != "muted" and data_icon != "pinned2") :
+                    nao_lidas = nl[last].find_element(By.TAG_NAME, 'span').text
+                    if(nao_lidas==""):
+                        nao_lidas = "1"
+                    # pega dados do painel esquerdo das mensagens recentes
+                    titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
+                    hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").text
+                    ultima_msg = self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
+                    # armazeno no array
+                    # a.append({"datahora": hora_ultima_msg, "nao_lidas": nao_lidas, "titulo": titulo, "mensagem": ultima_msg})
+                    # clico na conversa
+                    click_conversa = self.driver.find_element(By.XPATH, '//*//span[@title = "{}"]'.format(titulo))
+                    time.sleep(0.3)
+                    click_conversa.click()
+                    time.sleep(3)
+                    posts_last = self.driver.find_elements(By.XPATH, '//*[@id="main"]/div[3]/div/div[2]/div[3]/div')
+                    qtds_posts = len(posts_last)
+                    r = qtds_posts-int(nao_lidas)+1
+                    while r <= qtds_posts:
+                        try:
+                            print(self.driver.find_element(By.CSS_SELECTOR, '#main > div > div > div > div > div:nth-child('+str(r)+') > div > div > div > div.copyable-text > div > span.copyable-text > span').text)
+                        except:
+                            PrintException()
+                        r += 1
         # converto em json
-        res = json.dumps(a,ensure_ascii=False).replace("\\n"," #PULALINHA# ")
-        print(res)
+        # res = json.dumps(a,ensure_ascii=False).replace("\\n"," #PULALINHA# ")
+        #print(res)
 
         self.driver.implicitly_wait(20)
 
