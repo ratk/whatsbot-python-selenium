@@ -22,7 +22,7 @@ $ conda activate geobot
 $ pip install -r requirements.txt
 ```
 
-- fix 
+- fix if have problems with sqlalchemy
 ```sh
 $ pip install SQLAlchemy==1.3.6
 ```
