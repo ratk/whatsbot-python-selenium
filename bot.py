@@ -17,18 +17,27 @@ from selenium.common.exceptions import NoSuchElementException
 
 from spacy.cli import download
 import linecache
+from datetime import datetime
 
 
 #download("en_core_web_sm")
 
 def PrintException():
+    now = datetime.now()
+    date_time = now.strftime("%Y-%m-%d-%H")
+
     exc_type, exc_obj, tb = sys.exc_info()
     f = tb.tb_frame
     lineno = tb.tb_lineno
     filename = f.f_code.co_filename
     linecache.checkcache(filename)
     line = linecache.getline(filename, lineno, f.f_globals)
-    print ('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
+    #print ('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
+    # creating/opening a file to log
+    f = open("logs\\log_"+date_time+".txt", "a")
+    f.write("----------------\n")
+    f.write('EXCEPTION IN ({}, LINE {} "{}"): {}'.format(filename, lineno, line.strip(), exc_obj))
+    f.close()
 
 class ENGSM: 
     ISO_639_1 = 'en_core_web_sm'
@@ -54,6 +63,16 @@ class wppbot:
             database_uri=self.CONNECTION_STRING,
             tagger_language=ENGSM
         )
+        
+        #----------------------------------------------------------------------
+        # SEARCH VARIABLES
+        #----------------------------------------------------------------------
+        # first part not read
+        self.not_read_inicio = "//*[@id='pane-side']/div[1]/div/div"
+        # frequently changed
+        self.not_read_meio = "/div/div/div/div[2]"
+        #----------------------------------------------------------------------
+
         # self.trainer = ListTrainer(self.bot)
         self.bot.set_trainer(ListTrainer)
 
@@ -65,7 +84,6 @@ class wppbot:
         
         self.options.add_experimental_option('useAutomationExtension', False)
         self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
-        # self.options.add_experimental_option("debuggerAddress", "127.0.0.1:5678")
 
         # Inicializa o webdriver
         self.driver = webdriver.Chrome(self.chrome, options=self.options)
@@ -75,6 +93,10 @@ class wppbot:
         try: 
             self.driver.get('https://web.whatsapp.com/')
             self.driver.implicitly_wait(20)
+            ##force wait more 20 seconds
+            print('aguardando 20 segundos para mensagens do chrome')
+            time.sleep(20)
+            print ('continuando\n\n')
 
             self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
 
@@ -120,7 +142,7 @@ class wppbot:
             qtd = len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))
         except Exception as e:
             PrintException()
-            print("Erro ao escutar msgs")
+            # print("Erro ao escutar msgs")
 
         # percorre as mensagens recentes do painel esquerdo
         for i in range(1,len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))+1):
@@ -131,25 +153,25 @@ class wppbot:
             self.driver.implicitly_wait(0)
             # verifica se existe o elemento que informa se tem novas mensagens
             try:
-                if(self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div/span")):
+                if(self.driver.find_element(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[2]/span[1]/div/span")):
                     tem_nova_msg = True
             except NoSuchElementException:
                 nao_lidas = "0"
 
 
             if(tem_nova_msg):
-                nl = self.driver.find_elements(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[2]/span[1]/div")
+                nl = self.driver.find_elements(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[2]/span[1]/div")
                 last = len(nl) - 1
                 # pega sempre o ultimo elemento para o numero de mensagens nao lidas 
                 data_icon = nl[last].find_element(By.TAG_NAME, 'span').get_attribute("data-icon")
                 if (data_icon != "muted" and data_icon != "pinned2") :
                     nao_lidas = nl[last].find_element(By.TAG_NAME, 'span').text
                     if(nao_lidas==""):
-                        nao_lidas = "1"
+                        nao_lidas = "3"
                     # pega dados do painel esquerdo das mensagens recentes
-                    titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[1]/span").get_attribute("title")
-                    hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]/div/div/div[2]/div[1]/div[2]").text
-                    ultima_msg = self.driver.find_element(By.XPATH, "//*[@id='pane-side']/div[1]/div/div/div["+str(i)+"]/div/div/div[2]/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
+                    titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[1]/span").get_attribute("title")
+                    hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[2]").text
+                    ultima_msg = self.driver.find_element(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
                     # armazeno no array
                     # a.append({"datahora": hora_ultima_msg, "nao_lidas": nao_lidas, "titulo": titulo, "mensagem": ultima_msg})
                     # clico na conversa
@@ -162,7 +184,12 @@ class wppbot:
                     r = qtds_posts-int(nao_lidas)+1
                     while r <= qtds_posts:
                         try:
-                            print(self.driver.find_element(By.CSS_SELECTOR, '#main > div > div > div > div > div:nth-child('+str(r)+') > div > div > div > div.copyable-text > div > span.copyable-text > span').text)
+                            msgs_to_read = self.driver.find_element(By.CSS_SELECTOR, '#main > div > div > div > div > div:nth-child('+str(r)+')')
+                            pre_text_date = msgs_to_read.find_element(By.CSS_SELECTOR, '._22Msk > .copyable-text').get_attribute('data-pre-plain-text').replace('[','').split('] ')[0].split(', ')[1]
+                            pre_text_time = msgs_to_read.find_element(By.CSS_SELECTOR, '._22Msk > .copyable-text').get_attribute('data-pre-plain-text').replace('[','').split('] ')[0].split(', ')[0]
+                            pre_text_from = msgs_to_read.find_element(By.CSS_SELECTOR, '._22Msk > .copyable-text').get_attribute('data-pre-plain-text').replace('[','').split('] ')[1]
+                            pre_text_msg = msgs_to_read.find_element(By.CSS_SELECTOR, 'div > div > div > div.copyable-text > div > span.copyable-text > span').text.replace("\\n"," #PULALINHA# ")
+                            print("{} - {} as {} - {}{}".format(titulo, pre_text_date, pre_text_time, pre_text_from, pre_text_msg))
                         except:
                             PrintException()
                         r += 1
