@@ -2,6 +2,10 @@ profile
 profile/*
 venv
 venv/*
+.venv2
+.venv2/*
 __pycache__
 .env
 logs
+google-chrome-stable_current_amd64.deb
+compose-dev.yaml
