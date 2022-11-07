@@ -18,9 +18,9 @@ from selenium.common.exceptions import NoSuchElementException
 from spacy.cli import download
 import linecache
 from datetime import datetime
+import platform
 
-
-#download("en_core_web_sm")
+# download("en_core_web_sm")
 
 def PrintException():
     now = datetime.now()
@@ -74,12 +74,16 @@ class wppbot:
         #----------------------------------------------------------------------
 
         # self.trainer = ListTrainer(self.bot)
-        self.bot.set_trainer(ListTrainer)
-
-        self.chrome = self.dir_path+'\chromedriver.exe'
-
         self.options = webdriver.ChromeOptions()
-        self.options.add_argument(r"user-data-dir="+self.dir_path+"\profile\wpp")
+
+        self.bot.set_trainer(ListTrainer)
+        if(platform.system() == 'Linux'):
+            self.chrome = self.dir_path+'/chromedriver'
+            self.options.add_argument(r"user-data-dir="+self.dir_path+"/profile/wpp")
+        else:
+            self.chrome = self.dir_path+'\chromedriver.exe'
+            self.options.add_argument(r"user-data-dir="+self.dir_path+"\profile\wpp")
+
         self.options.add_argument('--remote-debugging-port=5678')
         
         self.options.add_experimental_option('useAutomationExtension', False)
@@ -87,23 +91,29 @@ class wppbot:
 
         # Inicializa o webdriver
         self.driver = webdriver.Chrome(self.chrome, options=self.options)
-    
 
-    def inicia(self,nome_contato):
+    def iniciadriver(self):
         try: 
             self.driver.get('https://web.whatsapp.com/')
             self.driver.implicitly_wait(20)
-            ##force wait more 20 seconds
-            print('aguardando 20 segundos para mensagens do chrome')
-            time.sleep(20)
+            ##force wait more 25 seconds
+            print('aguardando 25 segundos para mensagens do chrome')
+            time.sleep(25)
             print ('continuando\n\n')
 
-            self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
+        except Exception as e:
+            PrintException()
+            print("Erro ao iniciar driver chrome")
+            raise
 
+    def inicio(self,nome_contato):
+        try: 
+            self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
             self.caixa_de_pesquisa.send_keys(nome_contato)
             time.sleep(2)
             print(nome_contato)
             self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(nome_contato))
+            time.sleep(0.3)
             self.contato.click()
             time.sleep(2)
         except webdriver.common.exception.NoSuchElementException:
@@ -114,7 +124,6 @@ class wppbot:
             PrintException()
             print("Erro ao enviar msg")
             pass
-
 
     def saudacao(self,frase_inicial):
         self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
@@ -167,7 +176,7 @@ class wppbot:
                 if (data_icon != "muted" and data_icon != "pinned2") :
                     nao_lidas = nl[last].find_element(By.TAG_NAME, 'span').text
                     if(nao_lidas==""):
-                        nao_lidas = "3"
+                        nao_lidas = "5"
                     # pega dados do painel esquerdo das mensagens recentes
                     titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[1]/span").get_attribute("title")
                     hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[2]").text
@@ -193,6 +202,13 @@ class wppbot:
                         except:
                             PrintException()
                         r += 1
+                    
+                    self.inicio("Teste Bot Whats")
+                    time.sleep(1)
+                    self.btn_limpar = self.driver.find_element(By.XPATH, "//*[@id='side']/div[1]/div/div/span/button")
+                    time.sleep(1)
+                    self.btn_limpar.click()
+
         # converto em json
         # res = json.dumps(a,ensure_ascii=False).replace("\\n"," #PULALINHA# ")
         #print(res)

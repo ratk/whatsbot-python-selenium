@@ -4,19 +4,20 @@ import sys
 import time
 
 botName = "Geobot"
+default_chat = "Teste Bot Whats"
 
 bot = wppbot(botName)
 bot.treina('treinamento')
-bot.inicia('Teste Bot Whats')
-# bot.inicia('Bhost Recon - uailands')
-# bot.inicia('Janderson Cardoso')
+bot.iniciadriver()
+bot.inicio(default_chat)
+
 bot.saudacao(['*--------*\nBot: Oi, sou o '+botName+'!\nBot: Use *::* no início para falar comigo'])
 ultimo_texto = ''
 
 texto = ""
 
 while texto != "/quit":
-    time.sleep(10)
+    time.sleep(5)
     texto = bot.escuta()
 
     if texto == '/quit':
