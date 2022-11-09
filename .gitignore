@@ -9,3 +9,4 @@ __pycache__
 logs
 google-chrome-stable_current_amd64.deb
 compose-dev.yaml
+geckodriver.log

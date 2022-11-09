@@ -21,12 +21,9 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-from spacy.cli import download
 import linecache
 from datetime import datetime
 import platform
-
-# download("en_core_web_sm")
 
 def LogException():
     now = datetime.now()
@@ -57,9 +54,6 @@ def PrintException():
     print ('Element not found {}: {}'.format(lineno, exc_obj))
     LogException()
 
-class ENGSM: 
-    ISO_639_1 = 'en_core_web_sm'
-
 class wppbot:
 
     dir_path = os.getcwd()
@@ -68,36 +62,30 @@ class wppbot:
     # Provide the mongodb atlas url to connect python to mongodb using pymongo
     CONNECTION_STRING = os.getenv('MONGOSTR')   
 
-    def __init__(self, nome_bot):
-        # print(self.dir_path)
-        self.bot = ChatBot(nome_bot, 
-            storage_adapter='chatterbot.storage.MongoDatabaseAdapter',
-            logic_adapters=[
-                {
-                    'import_path': 'chatterbot.logic.BestMatch',
-                    'default_response': 'I am sorry, but I do not understand.'
-                }
-            ],
-            database_uri=self.CONNECTION_STRING,
-            tagger_language=ENGSM
-        )
+    def __init__(self, parking_chat_name, bot_name="whatsbot", welcome_message="Hi, I'm whatsbot :D"):
         
+        #----------------------------------------------------------------------
+        # DEFAULT VARIABLES
+        #----------------------------------------------------------------------
+        self.bot_name = bot_name
+        self.parking_chat_name = parking_chat_name
+        self.welcome_message = welcome_message
         #----------------------------------------------------------------------
         # SEARCH VARIABLES
         #----------------------------------------------------------------------
         # first part not read
-        self.not_read_inicio = "//*[@id='pane-side']/div[1]/div/div"
+        self.begin_not_read = "//*[@id='pane-side']/div[1]/div/div"
         # frequently changed
-        self.not_read_meio = "/div/div/div/div[2]"
+        self.middle_not_read = "/div/div/div/div[2]"
         #----------------------------------------------------------------------
-
-        # trainer for bot
-        ## self.trainer = ListTrainer(self.bot)
-        self.bot.set_trainer(ListTrainer)
 
         # options and profile for chrome
         # self.options = webdriver.ChromeOptions()
         # self.options.add_argument(r"user-data-dir="+self.dir_path+"\profile\wpp")
+        # self.options.add_argument('--remote-debugging-port=5678')
+        # self.options.add_argument("--headless")
+        # self.options.add_experimental_option('useAutomationExtension', False)
+        # self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
 
         # options with profile fo firefox driver
         self.options = webdriver.FirefoxOptions()
@@ -113,94 +101,88 @@ class wppbot:
             # self.browser = self.dir_path+'\chromedriver.exe'
             self.browser = self.dir_path+'\geckodriver.exe'
 
-        # self.options.add_argument('--remote-debugging-port=5678')
-        # self.options.add_argument("--headless")
-
-        # self.options.add_experimental_option('useAutomationExtension', False)
-        # self.options.add_experimental_option("excludeSwitches", ["enable-automation"])
-
-        # Inicializa o webdriver chrome
-        # self.driver = webdriver.Chrome(self.browser, options=self.options)
-
-        self.options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
-        self.driver = webdriver.Firefox(executable_path=self.browser, options=self.options, capabilities=self.firefox_capabilities)
-
-
-    def iniciadriver(self):
-        try: 
-            self.driver.get('https://web.whatsapp.com/')
-            self.driver.implicitly_wait(20)
-            ##force wait more 25 seconds
-            print('aguardando 20 segundos para mensagens do navegador')
-            time.sleep(20)
-            print ('continuando\n\n')
+        try:
+            # Start webdriver for chrome
+            # self.driver = webdriver.Chrome(self.browser, options=self.options)
+            
+            # Set firefox executable path
+            self.options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
+            # Start driver for Firefox
+            self.driver = webdriver.Firefox(executable_path=self.browser, options=self.options, capabilities=self.firefox_capabilities)
 
         except Exception as e:
             LogException()
-            print("Erro ao iniciar driver chrome")
+            print("Failed to load driver... bye bye!")
             raise
 
-    def inicio(self,nome_contato):
+        #try to open whatsapp page
+        try: 
+            self.driver.get('https://web.whatsapp.com/')
+            self.driver.implicitly_wait(30)
+            ##force wait more 30 seconds
+            print('force to wait 30 seconds for browser load messages...\n\n')
+            for t in range(1,31):
+                time.sleep(1)
+                print('\r', t, sep='', end='', flush=True)
+    
+            print ('\nReady...\n\n')
+
+        except Exception as e:
+            LogException()
+            print("Failed to load driver... bye bye!")
+            raise
+
+        # Go to parking chat
+        self.parking_chat()
+        # Send welcome message
+        self.send_message([self.welcome_message])
+
+    def parking_chat(self):
         try: 
             self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
-            self.caixa_de_pesquisa.send_keys(nome_contato)
+            self.caixa_de_pesquisa.send_keys(self.parking_chat_name)
             time.sleep(2)
             print("  ")
             print("----------------------------------------")
-            print("default Group: " + nome_contato)
+            print("default Group: " + self.parking_chat_name)
             print("----------------------------------------")
-            self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(nome_contato))
+            self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(self.parking_chat_name))
             time.sleep(0.3)
             self.contato.click()
             time.sleep(2)
         except NoSuchElementException:
-            # print("Elemento nao encontrado")
             pass
             PrintException()
         except Exception as e:
-            print("Erro ao enviar msg")
+            print("Message send failed")
             pass
             LogException()
 
-
-    def send_message(self, message):
-        message_input_selector = '._1hRBM > div:nth-child(2)'
-        # message_field = self.driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-        message_field = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')))
-        # message_field = self.driver.find_element( By.CSS_SELECTOR, message_input_selector)
-        time.sleep(1)
-        message_field.clear()
-        message_field.click()
-
-        for t in message:
-            message_field.send_keys(t)
-        message_field.send_keys(u'\ue007')
-
-    def saudacao(self,frase_inicial):
+    # Function to send message in a selected Contact or Group
+    def send_message(self,message_to_send):
         try:
-            self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-            self.caixa_de_mensagem.click()
-            self.caixa_de_mensagem.clear()
+            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            self.chat_message_input.click()
+            self.chat_message_input.clear()
 
-            if type(frase_inicial) == list:
-                for frase in frase_inicial:
-                    # quebra a mensagem com shift+enter ao inves de \n
-                    for part in frase.split('\n'):
-                        # Digita a mensagem
+            if type(message_to_send) == list:
+                for message in message_to_send:
+                    # break messagem with shift+enter instead \n
+                    for part in message.split('\n'):
+                        # type message letter by letter (prevent errors)
                         time.sleep(0.2)
                         for t in part:
-                            self.caixa_de_mensagem.send_keys(t)
-                        self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+                            self.chat_message_input.send_keys(t)
+                        self.chat_message_input.send_keys(Keys.SHIFT + Keys.ENTER)
                     time.sleep(1)
-                    self.caixa_de_mensagem.send_keys(Keys.ENTER)
+                    self.chat_message_input.send_keys(Keys.ENTER)
             else:
                 return False
         except NoSuchElementException:
-            # print("Elemento nao encontrado")
             PrintException()
             return False
         except:
-            print("Erro saudacao")
+            print("Error on send_message")
             LogException()
             return False
 
@@ -229,14 +211,14 @@ class wppbot:
             self.driver.implicitly_wait(0)
             # verifica se existe o elemento que informa se tem novas mensagens
             try:
-                if(self.driver.find_element(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[2]/span[1]/div/span")):
+                if(self.driver.find_element(By.XPATH, self.begin_not_read + "/div["+str(i)+"]"+self.middle_not_read+"/div[2]/div[2]/span[1]/div/span")):
                     tem_nova_msg = True
             except NoSuchElementException:
                 nao_lidas = "0"
 
 
             if(tem_nova_msg):
-                nl = self.driver.find_elements(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[2]/span[1]/div")
+                nl = self.driver.find_elements(By.XPATH, self.begin_not_read + "/div["+str(i)+"]"+self.middle_not_read+"/div[2]/div[2]/span[1]/div")
                 last = len(nl) - 1
                 # pega sempre o ultimo elemento para o numero de mensagens nao lidas 
                 data_icon = nl[last].find_element(By.TAG_NAME, 'span').get_attribute("data-icon")
@@ -245,9 +227,9 @@ class wppbot:
                     if(nao_lidas==""):
                         nao_lidas = "5"
                     # pega dados do painel esquerdo das mensagens recentes
-                    titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[1]/span").get_attribute("title")
-                    hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.not_read_meio+"/div[1]/div[2]").text
-                    ultima_msg = self.driver.find_element(By.XPATH, self.not_read_inicio + "/div["+str(i)+"]"+self.not_read_meio+"/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
+                    titulo = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.middle_not_read+"/div[1]/div[1]/span").get_attribute("title")
+                    hora_ultima_msg = self.driver.find_element("xpath", "//*[contains(@class, '_3uIPm')]/div["+str(i)+"]"+self.middle_not_read+"/div[1]/div[2]").text
+                    ultima_msg = self.driver.find_element(By.XPATH, self.begin_not_read + "/div["+str(i)+"]"+self.middle_not_read+"/div[2]/div[1]/span").get_attribute('title').replace("\u202a","").replace("\u202c","")
                     # armazeno no array
                     # a.append({"datahora": hora_ultima_msg, "nao_lidas": nao_lidas, "titulo": titulo, "mensagem": ultima_msg})
                     # clico na conversa
@@ -273,7 +255,7 @@ class wppbot:
                             LogException()
                         r += 1
                     
-                    self.inicio("Teste Bot Whats")
+                    self.parking_group()
                     time.sleep(1)
                     try:
                         self.btn_limpar = self.driver.find_element(By.XPATH, "//*[@id='side']/div[1]/div/div/span/button")
@@ -293,13 +275,13 @@ class wppbot:
 
         return texto
 
-    def aprender(self,ultimo_texto,frase_inicial,frase_final,frase_erro):
+    def aprender(self,ultimo_texto,message_to_send,frase_final,frase_erro):
         try:
-            self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-            for t in frase_inicial:
-                self.caixa_de_mensagem.send_keys(t)
+            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            for t in message_to_send:
+                self.chat_message_input.send_keys(t)
             time.sleep(1)
-            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+            self.chat_message_input.send_keys(Keys.ENTER)
         except NoSuchElementException:
             # print("Elemento nao encontrado")
             PrintException()
@@ -324,16 +306,16 @@ class wppbot:
 
                     self.bot.train(novo)
                     for t in frase_final:
-                        self.caixa_de_mensagem.send_keys(t)
+                        self.chat_message_input.send_keys(t)
                     time.sleep(1)
-                    self.caixa_de_mensagem.send_keys(Keys.ENTER)
+                    self.chat_message_input.send_keys(Keys.ENTER)
                     self.x = False
                     return ultimo_texto
                 else:
                     for t in frase_erro:
-                        self.caixa_de_mensagem.send_keys(t)
+                        self.chat_message_input.send_keys(t)
                     time.sleep(1)
-                    self.caixa_de_mensagem.send_keys(Keys.ENTER)
+                    self.chat_message_input.send_keys(Keys.ENTER)
                     self.x = False
                     return ultimo_texto
             else:
@@ -352,10 +334,10 @@ class wppbot:
             for part in new.split('\n'):
                 # Digita a mensagem
                 for t in part:
-                    self.caixa_de_mensagem.send_keys(t)
-                self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+                    self.chat_message_input.send_keys(t)
+                self.chat_message_input.send_keys(Keys.SHIFT + Keys.ENTER)
             time.sleep(2)
-            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+            self.chat_message_input.send_keys(Keys.ENTER)
 
     def responde(self,texto):
         try:
@@ -363,12 +345,12 @@ class wppbot:
             # if float(response.confidence) > 0.5:
             response = str(response)
             response = 'bot: ' + response
-            self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
             time.sleep(0.2)
             for t in response:
-                self.caixa_de_mensagem.send_keys(t)
+                self.chat_message_input.send_keys(t)
             time.sleep(1)
-            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+            self.chat_message_input.send_keys(Keys.ENTER)
         except NoSuchElementException:
             # print("Elemento nao encontrado")
             PrintException()
@@ -380,19 +362,19 @@ class wppbot:
         try:
             time.sleep(2)
             # Seleciona acaixa de mensagem
-            self.caixa_de_mensagem = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
             # quebra a mensagem com shift+enter ao inves de \n
-            self.caixa_de_mensagem.click()
-            self.caixa_de_mensagem.clear()
+            self.chat_message_input.click()
+            self.chat_message_input.clear()
             for part in msg.split('\n'):
                 # Digita a mensagem
-                self.caixa_de_mensagem.click()
+                self.chat_message_input.click()
                 time.sleep(0.2)
                 for t in part:
-                    self.caixa_de_mensagem.send_keys(t)
-                self.caixa_de_mensagem.send_keys(Keys.SHIFT + Keys.ENTER)
+                    self.chat_message_input.send_keys(t)
+                self.chat_message_input.send_keys(Keys.SHIFT + Keys.ENTER)
             time.sleep(1)
-            self.caixa_de_mensagem.send_keys(Keys.ENTER)
+            self.chat_message_input.send_keys(Keys.ENTER)
         except NoSuchElementException:
             # print("Elemento nao encontrado")
             PrintException()
