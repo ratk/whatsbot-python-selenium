@@ -1,0 +1,336 @@
+1667882331167	geckodriver	INFO	Listening on 127.0.0.1:62593
+1667882334195	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667882334738	Marionette	INFO	Marionette enabled
+1667882334744	Marionette	INFO	Listening on port 62607
+Read port: 62607
+1667882334917	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667882489299	geckodriver	INFO	Listening on 127.0.0.1:62697
+1667882492321	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 62607
+1667882492859	Marionette	INFO	Marionette enabled
+1667882492862	Marionette	INFO	Listening on port 62712
+Read port: 62712
+1667882494487	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667882720946	Marionette	INFO	Stopped listening on port 62712
+1667882914671	geckodriver	INFO	Listening on 127.0.0.1:62852
+1667882917685	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667882918263	Marionette	INFO	Marionette enabled
+1667882918268	Marionette	INFO	Listening on port 62866
+Read port: 62866
+1667882918486	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667882960961	Marionette	INFO	Stopped listening on port 62866
+1667883059348	geckodriver	INFO	Listening on 127.0.0.1:62911
+1667883062444	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667883063076	Marionette	INFO	Marionette enabled
+1667883063082	Marionette	INFO	Listening on port 62923
+Read port: 62923
+1667883063399	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667883101493	Marionette	INFO	Stopped listening on port 62923
+[Parent 4084, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1667883799929	geckodriver	INFO	Listening on 127.0.0.1:63169
+1667883802881	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667883803404	Marionette	INFO	Marionette enabled
+1667883803407	Marionette	INFO	Listening on port 63183
+Read port: 63183
+1667883803507	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 58: Error: Can't find profile directory.
+1667883821542	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1667883893404	geckodriver	INFO	Listening on 127.0.0.1:63242
+1667883896423	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 63183
+1667883896941	Marionette	INFO	Marionette enabled
+1667883896944	Marionette	INFO	Listening on port 63255
+Read port: 63255
+1667883898577	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667883975715	Marionette	INFO	Stopped listening on port 63255
+1667883979667	geckodriver	INFO	Listening on 127.0.0.1:63310
+1667883982695	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667883983241	Marionette	INFO	Marionette enabled
+1667883983244	Marionette	INFO	Listening on port 63325
+Read port: 63325
+1667883983362	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+[Parent 5984, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:723
+1667884059449	geckodriver	INFO	Listening on 127.0.0.1:63368
+1667884062524	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 63325
+1667884063026	Marionette	INFO	Marionette enabled
+1667884063029	Marionette	INFO	Listening on port 63381
+Read port: 63381
+1667884064697	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667884170343	Marionette	INFO	Stopped listening on port 63381
+1667884392107	geckodriver	INFO	Listening on 127.0.0.1:63602
+1667884395165	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667884395677	Marionette	INFO	Marionette enabled
+1667884395680	Marionette	INFO	Listening on port 63616
+Read port: 63616
+1667884395991	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667884488783	Marionette	INFO	Stopped listening on port 63616
+1667884543708	geckodriver	INFO	Listening on 127.0.0.1:63652
+1667884546761	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667884547427	Marionette	INFO	Marionette enabled
+1667884547432	Marionette	INFO	Listening on port 63664
+Read port: 63664
+1667884547671	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667884562657	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1667884641289	geckodriver	INFO	Listening on 127.0.0.1:63719
+1667884644353	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 63664
+1667884644903	Marionette	INFO	Marionette enabled
+1667884644907	Marionette	INFO	Listening on port 63737
+Read port: 63737
+1667884646547	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 6243 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 1062 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 3253 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 6328 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript warning: https://pix.adrta.com/cdnf.js?v=22.110, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+[Parent 16756, IPC I/O Parent] WARNING: DuplicateHandle failed for handle 0 in TransferHandles: file /builds/worker/checkouts/gecko/ipc/chromium/src/chrome/common/ipc_channel_win.cc:723
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+JavaScript error: https://live.primis.tech/live/liveVideo.php?vpaidManager=sekindo&s=58057&ri=6C69766553746174737C736B317B54307D7B64323032322D31312D30385F30377D7B7331323334393634397D7B4335367D7B536447687063334276615735305A584975593239747D7B6266697265666F787D7B716465736B746F707D7B6F77696E646F77737D7B583435337D7B593332357D7B66317D7B4C31323532317DFEFE&userIpAddr=179.104.230.130&userUA=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%3B+rv%3A106.0%29+Gecko%2F20100101+Firefox%2F106.0&debugInformation=&isWePassGdpr=1&noViewableMidrollPolicy=vary&isDoublePreroll=1&autoSkipVideoSec=30&c2pWaitTime=10&sdkv=&isSinglePageFloatSupport=0&isAmpIframe=0&csuuid=6369e76d64521&debugInfo=12349649_&debugPlayerSession=&pubUrlDEMO=&isAsyncDEMO=0&customPlaylistIdDEMO=&sta=12349649&showLogo=0&clkUrl=&plMult=-1&schedule=eyJwcmVfcm9sbCI6MSwibWlkX3JvbGwiOltdLCJnYXAiOiJhdXRvIn0%3D&content=plembed1a8bixprtmvo&secondaryContent=&x=453&y=325&pubUrl=https%3A%2F%2Fthispointer.com%2Fpython-how-to-access-characters-in-string-by-index%2F&contentNum=1&flow_closeBtn=1&flowCloseTimeout=0&flow_closeButtonPosition=right&flow_direction=br&flow_horizontalOffset=1&flow_bottomOffset=1&impGap=30&flow_width=400&flow_height=225&videoType=flow&gdpr=0&gdprConsent=&contentFeedId=&geoLati=-19.5483&geoLong=-47.9414&vpTemplate=12521&flowMode=below&isRealPreroll=0&playerApiId=&isApp=0&ccpa=0&ccpaConsent=&subId= line 143 > eval, line 359: TypeError: this.img is undefined
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 7208 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 7220 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: uncaught exception: 7
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 5179 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/nOAuMeOBpF9evwNFXVQkLuXNj92N0OJ7uU_f3Vfdro8.js line 2 > eval line 324 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.google.com."
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 4745 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 671 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 5703 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 2255 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 1639 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 3263 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript warning: https://pix.adrta.com/cdnf.js?v=22.110, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript warning: https://pagead2.googlesyndication.com/bg/HZrunHRjvTX5MIeL6Ibl7iJKqMmAAzHWmbkaKM7M3x0.js line 2 > eval line 1048 > eval line 1 > eval line 1 > eval, line 1: WEBGL_debug_renderer_info is deprecated in Firefox and will be removed. Please use RENDERER.
+console.warn: LoginRecipes: "Falling back to a synchronous message for: https://www.w3schools.com."
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+JavaScript error: , line 0: TypeError: NetworkError when attempting to fetch resource.
+1667885287731	geckodriver	INFO	Listening on 127.0.0.1:58814
+1667885290834	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 63737
+1667885291671	Marionette	INFO	Marionette enabled
+1667885291677	Marionette	INFO	Listening on port 58827
+[GFX1-]: shader-cache: Timed out before finishing loads
+[2022-11-08T05:28:12Z ERROR webrender_bindings::program_cache] shader-cache: Timed out before finishing loads
+Read port: 58827
+1667885293244	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667885348191	Marionette	INFO	Stopped listening on port 58827
+[Parent 16472, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1667885352438	geckodriver	INFO	Listening on 127.0.0.1:58841
+1667885355440	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667885356126	Marionette	INFO	Marionette enabled
+1667885356130	Marionette	INFO	Listening on port 58853
+Read port: 58853
+1667885356491	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667885472267	Marionette	INFO	Stopped listening on port 58853
+JavaScript error: chrome://remote/content/marionette/cert.js, line 57: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1667885549807	geckodriver	INFO	Listening on 127.0.0.1:58877
+1667885552819	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667885553791	Marionette	INFO	Marionette enabled
+1667885553796	Marionette	INFO	Listening on port 58890
+Read port: 58890
+1667885554107	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667885676842	Marionette	INFO	Stopped listening on port 58890
+1667885734655	geckodriver	INFO	Listening on 127.0.0.1:58915
+1667885737698	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667885738244	Marionette	INFO	Marionette enabled
+1667885738246	Marionette	INFO	Listening on port 58927
+Read port: 58927
+1667885738465	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667885812154	Marionette	INFO	Stopped listening on port 58927
+1667885824183	geckodriver	INFO	Listening on 127.0.0.1:58942
+1667885827235	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667885828003	Marionette	INFO	Marionette enabled
+1667885828007	Marionette	INFO	Listening on port 58954
+Read port: 58954
+1667885828279	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667886175698	Marionette	INFO	Stopped listening on port 58954
+[Parent 16748, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1667886198807	geckodriver	INFO	Listening on 127.0.0.1:58982
+1667886201803	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667886202746	Marionette	INFO	Marionette enabled
+1667886202749	Marionette	INFO	Listening on port 58994
+Read port: 58994
+1667886202953	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: shader-cache: Timed out before finishing loads
+[2022-11-08T05:43:23Z ERROR webrender_bindings::program_cache] shader-cache: Timed out before finishing loads
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667887102773	geckodriver	INFO	Listening on 127.0.0.1:59414
+1667887105812	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+Read port: 58994
+1667887107020	Marionette	INFO	Marionette enabled
+1667887107028	Marionette	INFO	Listening on port 59430
+Read port: 59430
+1667887108231	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+1667888443906	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1667890337614	Marionette	INFO	Stopped listening on port 59430
+1667890343490	geckodriver	INFO	Listening on 127.0.0.1:60597
+1667890346650	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667890347674	Marionette	INFO	Marionette enabled
+1667890347680	Marionette	INFO	Listening on port 60609
+Read port: 60609
+1667890347911	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+[GFX1-]: shader-cache: Timed out before finishing loads
+[2022-11-08T06:52:28Z ERROR webrender_bindings::program_cache] shader-cache: Timed out before finishing loads
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+[2022-11-08T06:53:27Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:27Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:28Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:29Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:29Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:29Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:53:29Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+1667890452023	Marionette	INFO	Stopped listening on port 60609
+[Parent 19208, IPC I/O Parent] WARNING: file /builds/worker/checkouts/gecko/ipc/chromium/src/base/process_util_win.cc:167
+1667890459757	geckodriver	INFO	Listening on 127.0.0.1:60625
+1667890462807	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667890463409	Marionette	INFO	Marionette enabled
+1667890463414	Marionette	INFO	Listening on port 60637
+Read port: 60637
+1667890463648	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+[2022-11-08T06:55:01Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:01Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T06:55:02Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+1667890643617	Marionette	INFO	Stopped listening on port 60637
+1667890854843	geckodriver	INFO	Listening on 127.0.0.1:60688
+1667890857872	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-profile" "D:\\Geoguide\\whats-bot/profile/wppf" "-no-remote"
+1667890858693	Marionette	INFO	Marionette enabled
+1667890858696	Marionette	INFO	Listening on port 60700
+Read port: 60700
+1667890858982	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/notification_2a485d84012c106acef03b527bb54635.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-middle_7fa161964e93db72b8d00ae22189d75f.mp3
+JavaScript error: https://web.whatsapp.com/serviceworker.js, line 1: TypeError: Cache.put: Cache got basic response with bad status 206 while trying to add request https://web.whatsapp.com/sequential-ptt-end_62ed28be622237546fd39f9468a76a49.mp3
+[2022-11-08T07:10:52Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:52Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:53Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:54Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:10:54Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+1667891463788	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1667891472909	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:236:24
+TimedPromise@chrome://remote/content/marionette/sync.js:221:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+[2022-11-08T07:11:38Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+[2022-11-08T07:11:38Z ERROR mp4parse] Found 2 nul bytes in "\0\0"
+1667891727305	Marionette	INFO	Stopped listening on port 60700

@@ -12,8 +12,9 @@ bot.iniciadriver()
 bot.inicio(default_chat)
 
 bot.saudacao(['*--------*\nBot: Oi, sou o '+botName+'!\nBot: Use *::* no início para falar comigo'])
-ultimo_texto = ''
+# bot.send_message("bot: OIIIII!")
 
+ultimo_texto = ''
 texto = ""
 
 while texto != "/quit":
@@ -22,6 +23,7 @@ while texto != "/quit":
 
     if texto == '/quit':
         bot.envia_msg("bot: Bye bye!")
+        bot.send_message("bot: Bye bye!")
         time.sleep(4)
     elif texto != ultimo_texto and re.match(r'^::', texto):
         ultimo_texto = texto
