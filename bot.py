@@ -70,6 +70,7 @@ class wppbot:
         self.bot_name = bot_name
         self.parking_chat_name = parking_chat_name
         self.welcome_message = welcome_message
+        self.is_in_parking_group = False
         #----------------------------------------------------------------------
         # SEARCH VARIABLES
         #----------------------------------------------------------------------
@@ -95,9 +96,13 @@ class wppbot:
         self.firefox_capabilities['marionette'] = True
 
         if(platform.system() == 'Linux'):
+            # Set firefox executable path
+            self.options.binary_location = r'/usr/bin/firefox'
             # self.browser = self.dir_path+'/chromedriver'
             self.browser = self.dir_path+'/geckodriver'
         else:
+            # Set firefox executable path
+            self.options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
             # self.browser = self.dir_path+'\chromedriver.exe'
             self.browser = self.dir_path+'\geckodriver.exe'
 
@@ -105,8 +110,6 @@ class wppbot:
             # Start webdriver for chrome
             # self.driver = webdriver.Chrome(self.browser, options=self.options)
             
-            # Set firefox executable path
-            self.options.binary_location = r'C:\Program Files\Mozilla Firefox\firefox.exe'
             # Start driver for Firefox
             self.driver = webdriver.Firefox(executable_path=self.browser, options=self.options, capabilities=self.firefox_capabilities)
 
@@ -120,10 +123,10 @@ class wppbot:
             self.driver.get('https://web.whatsapp.com/')
             self.driver.implicitly_wait(30)
             ##force wait more 30 seconds
-            print('force to wait 30 seconds for browser load messages...\n\n')
-            for t in range(1,31):
-                time.sleep(1)
-                print('\r', t, sep='', end='', flush=True)
+            # print('force to wait 30 seconds for browser load messages...\n\n')
+            # for t in range(1,31):
+            #     time.sleep(1)
+            #     print('\r', t, sep='', end='', flush=True)
     
             print ('\nReady...\n\n')
 
@@ -137,31 +140,10 @@ class wppbot:
         # Send welcome message
         self.send_message([self.welcome_message])
 
-    def parking_chat(self):
-        try: 
-            self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
-            self.caixa_de_pesquisa.send_keys(self.parking_chat_name)
-            time.sleep(2)
-            print("  ")
-            print("----------------------------------------")
-            print("default Group: " + self.parking_chat_name)
-            print("----------------------------------------")
-            self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(self.parking_chat_name))
-            time.sleep(0.3)
-            self.contato.click()
-            time.sleep(2)
-        except NoSuchElementException:
-            pass
-            PrintException()
-        except Exception as e:
-            print("Message send failed")
-            pass
-            LogException()
-
     # Function to send message in a selected Contact or Group
     def send_message(self,message_to_send):
         try:
-            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
+            self.chat_message_input = self.driver.find_element(By.XPATH, '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
             self.chat_message_input.click()
             self.chat_message_input.clear()
 
@@ -186,22 +168,51 @@ class wppbot:
             LogException()
             return False
 
-    def escuta(self):
-        texto = ""
-        try:
-            post = self.driver.find_elements("xpath", "//*[contains(@class, '_1-FMR')]")
-            ultimo = len(post) - 1
-            texto = post[ultimo].find_element(By.CSS_SELECTOR, 'span.selectable-text').text
-
-            a=[]
-            qtd = len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))
+    def parking_chat(self):
+        try: 
+            self.caixa_de_pesquisa = self.driver.find_element(By.CLASS_NAME, "_13NKt")
+            self.caixa_de_pesquisa.send_keys(self.parking_chat_name)
+            time.sleep(2)
+            print("  ")
+            print("----------------------------------------")
+            print("default Group: " + self.parking_chat_name)
+            print("----------------------------------------")
+            self.contato = self.driver.find_element(By.XPATH, '//span[@title = "{}"]'.format(self.parking_chat_name))
+            time.sleep(0.3)
+            self.contato.click()
+            time.sleep(2)
+            self.is_in_parking_group = True
         except NoSuchElementException:
-            # print("Elemento nao encontrado")
+            pass
+            PrintException()
+        except Exception as e:
+            print("Message send failed")
+            pass
+            LogException()
+
+    # read parking group
+    def parking_group_listner(self):
+        msg_text = ""
+
+        # open parking chat
+        if(not self.is_in_parking_group):
+            self.parking_chat()
+
+        # Try to read last message
+        try:
+            post = self.driver.find_elements(By.XPATH, "//*[contains(@class, '_1-FMR')]")
+            ultimo = len(post) - 1
+            msg_text = post[ultimo].find_element(By.CSS_SELECTOR, 'span.selectable-text').text
+
+        except NoSuchElementException:
             PrintException()
         except Exception as e:
             LogException()
-            # print("Erro ao escutar msgs")
 
+        return msg_text
+
+    def parking_default_listner(self):
+        msg_text = ""
         # percorre as mensagens recentes do painel esquerdo
         for i in range(1,len(self.driver.find_elements(By.XPATH,'//*[@id="pane-side"]/div/div/div/div'))+1):
             nao_lidas = "0"
@@ -255,7 +266,8 @@ class wppbot:
                             LogException()
                         r += 1
                     
-                    self.parking_group()
+                    self.is_in_parking_group = False
+                    self.parking_group_listner()
                     time.sleep(1)
                     try:
                         self.btn_limpar = self.driver.find_element(By.XPATH, "//*[@id='side']/div[1]/div/div/span/button")
@@ -273,116 +285,5 @@ class wppbot:
 
         self.driver.implicitly_wait(20)
 
-        return texto
+        return msg_text
 
-    def aprender(self,ultimo_texto,message_to_send,frase_final,frase_erro):
-        try:
-            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-            for t in message_to_send:
-                self.chat_message_input.send_keys(t)
-            time.sleep(1)
-            self.chat_message_input.send_keys(Keys.ENTER)
-        except NoSuchElementException:
-            # print("Elemento nao encontrado")
-            PrintException()
-        except:
-            LogException()
-
-        self.x = True
-        while self.x == True:
-            texto = self.escuta()
-
-            if texto != ultimo_texto and re.match(r'^::', texto):
-                if texto.find('|') != -1:
-                    ultimo_texto = texto
-                    texto = texto.replace('::', '')
-                    texto = texto.lower()
-                    texto = texto.replace('|', '|*')
-                    texto = texto.split('*')
-                    novo = []
-                    for elemento in texto:
-                        elemento = elemento.strip()
-                        novo.append(elemento)
-
-                    self.bot.train(novo)
-                    for t in frase_final:
-                        self.chat_message_input.send_keys(t)
-                    time.sleep(1)
-                    self.chat_message_input.send_keys(Keys.ENTER)
-                    self.x = False
-                    return ultimo_texto
-                else:
-                    for t in frase_erro:
-                        self.chat_message_input.send_keys(t)
-                    time.sleep(1)
-                    self.chat_message_input.send_keys(Keys.ENTER)
-                    self.x = False
-                    return ultimo_texto
-            else:
-                ultimo_texto = texto
-
-    def noticias(self):
-
-        req = requests.get('https://newsapi.org/v2/top-headlines?sources=globo&pageSize=2&apiKey=f6fdb7cb0f2a497d92dbe719a29b197f')
-        noticias = json.loads(req.text)
-
-        for news in noticias['articles']:
-            titulo = news['title']
-            link = news['url']
-            new = 'bot: ' + titulo + ' ' + link + '\n'
-            # quebra a mensagem com shift+enter ao inves de \n
-            for part in new.split('\n'):
-                # Digita a mensagem
-                for t in part:
-                    self.chat_message_input.send_keys(t)
-                self.chat_message_input.send_keys(Keys.SHIFT + Keys.ENTER)
-            time.sleep(2)
-            self.chat_message_input.send_keys(Keys.ENTER)
-
-    def responde(self,texto):
-        try:
-            response = self.bot.get_response(texto)
-            # if float(response.confidence) > 0.5:
-            response = str(response)
-            response = 'bot: ' + response
-            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-            time.sleep(0.2)
-            for t in response:
-                self.chat_message_input.send_keys(t)
-            time.sleep(1)
-            self.chat_message_input.send_keys(Keys.ENTER)
-        except NoSuchElementException:
-            # print("Elemento nao encontrado")
-            PrintException()
-        except:
-            LogException()
-
-    def envia_msg(self, msg):
-        """ Envia uma mensagem para a conversa aberta """
-        try:
-            time.sleep(2)
-            # Seleciona acaixa de mensagem
-            self.chat_message_input = self.driver.find_element("xpath", '//*[@id="main"]/footer/div[1]/div/span/div/div[2]/div[1]/div/div')
-            # quebra a mensagem com shift+enter ao inves de \n
-            self.chat_message_input.click()
-            self.chat_message_input.clear()
-            for part in msg.split('\n'):
-                # Digita a mensagem
-                self.chat_message_input.click()
-                time.sleep(0.2)
-                for t in part:
-                    self.chat_message_input.send_keys(t)
-                self.chat_message_input.send_keys(Keys.SHIFT + Keys.ENTER)
-            time.sleep(1)
-            self.chat_message_input.send_keys(Keys.ENTER)
-        except NoSuchElementException:
-            # print("Elemento nao encontrado")
-            PrintException()
-        except Exception as e:
-            LogException()
-            print("Erro ao enviar msg")
-
-    def treina(self,nome_pasta):
-        for treino in os.listdir(nome_pasta):
-            conversas = open(nome_pasta+'/'+treino, 'r', encoding='utf-8').readlines()
-            self.bot.train(conversas)

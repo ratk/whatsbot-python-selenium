@@ -9,29 +9,37 @@ welcome_message = "*--------*\nBot: Oi, sou o "+bot_name+"!\nBot: Use *::* no in
 # Start class whatsbot and open browser for start
 bot = wppbot(parking_chat_name, bot_name, welcome_message)
 
-ultimo_texto = ''
-texto = ""
+last_msg = ''
+message = ""
 
-# while texto != "/quit":
-#     time.sleep(5)
-#     texto = bot.escuta()
+while message != "/quit":
+    time.sleep(5)
+    message = bot.parking_group_listner()
 
-#     if texto == '/quit':
-#         bot.envia_msg("bot: Bye bye!")
-#         bot.send_message("bot: Bye bye!")
-#         time.sleep(4)
-#     elif texto != ultimo_texto and re.match(r'^::', texto):
-#         ultimo_texto = texto
-#         texto = texto.replace('::', '')
-#         texto = texto.lower()
+    if message != last_msg and re.match(r'^::', message):
+        last_msg = message
+        message = message.replace('::', '')
+        message = message.lower()
+    
+    # If empty search for new msgs
+    if message != "/quit":
+        bot.parking_default_listner()
 
-#         if (texto == 'aprender' or texto == ' aprender' or texto == 'ensinar' or texto == ' ensinar'):
-#             bot.aprender(texto,'bot: Escreva a pergunta e após o | a resposta.','bot: Obrigado por ensinar! Agora já sei!','bot: Você escreveu algo errado! Comece novamente..')
-#         elif (texto == 'noticias' or texto == ' noticias' or texto == 'noticia' or texto == ' noticia' or texto == 'notícias' or texto == ' notícias' or texto == 'notícia' or texto == ' notícia'):
-#             bot.noticias()
-#         else:
-#             bot.responde(texto)
+# ---------------------------
+# End of program
+# ---------------------------
 
+for t in range(1,6):
+    print('\rLeaving in ', 6-t, sep='', end='', flush=True)
+    time.sleep(1)
+
+# Go to parking chat and send close msg
+bot.parking_chat()
+bot.send_message("bot: Bye bye!")
+print("\n\nbot: Bye bye!")
+
+#close driver and quit
 bot.driver.close()
 bot.driver.quit()
+
 exit()
