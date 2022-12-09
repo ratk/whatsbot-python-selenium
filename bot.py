@@ -78,6 +78,7 @@ class wppbot:
         self.begin_not_read = "//*[@id='pane-side']/div[1]/div/div"
         # frequently changed
         self.middle_not_read = "/div/div/div/div[2]"
+        self.last_posts = '//*[@id="main"]/div[2]/div/div[2]/div[3]/div'
         #----------------------------------------------------------------------
 
         # options and profile for chrome
@@ -248,7 +249,7 @@ class wppbot:
                     time.sleep(0.3)
                     click_conversa.click()
                     time.sleep(3)
-                    posts_last = self.driver.find_elements(By.XPATH, '//*[@id="main"]/div[3]/div/div[2]/div[3]/div')
+                    posts_last = self.driver.find_elements(By.XPATH, self.last_posts)
                     qtds_posts = len(posts_last)
                     r = qtds_posts-int(nao_lidas)+1
                     while r <= qtds_posts:

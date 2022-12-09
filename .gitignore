@@ -4,6 +4,8 @@ venv
 venv/*
 .venv2
 .venv2/*
+.venva
+.venva/*
 __pycache__
 .env
 logs
